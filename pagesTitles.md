@@ -1,4 +1,4 @@
-# Títulos das páginasMassacre de Luxor – Wikipédia, a enciclopédia livre
-- Fazenda São Bernardino – Wikipédia, a enciclopédia livre
-- Engrácia de Saragoça – Wikipédia, a enciclopédia livre
-- Hemibalismo – Wikipédia, a enciclopédia livre
+# Títulos das páginasValadares Gaia Futebol Clube – Wikipédia, a enciclopédia livre
+- Pasquale de Chirico – Wikipédia, a enciclopédia livre
+- Stick – Wikipédia, a enciclopédia livre
+- Nectophryne – Wikipédia, a enciclopédia livre

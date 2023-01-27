@@ -3,12 +3,12 @@ from RandomWikipediaPage import RandomWikipediaPage
 class WordsSearcher:
     @staticmethod
     def readSearchedWords():
-        searchedWords = {}
+        searchedWords = set()
 
         while True:
             word = input("Digite a palavra buscada: ")
 
-            searchedWords.append(word)
+            searchedWords.add(word)
 
             if input("Digite 1 caso queira inserir outra palavra: ") != "1":
                 return searchedWords
@@ -25,14 +25,14 @@ class WordsSearcher:
 
     @staticmethod
     def getTitlesFromPagesWithTheSearchedWord():
-        pagesQuantity, searchedWord = WordsSearcher.readSearchData().values()
+        pagesQuantity = WordsSearcher.readPagesQuantity()
+        searchedWords = WordsSearcher.readSearchedWords()
         foundPagesTitles = []
-  
+        
         while len(foundPagesTitles) <= pagesQuantity:
             pageContent, pageTitle = RandomWikipediaPage.getRandomWikipediaPage().values()
 
-            if searchedWord in pageContent:
-                foundPagesTitles.append(pageTitle)
+            next(foundPagesTitles.append(pageTitle) for word in searchedWords if word in pageContent)
 
         return foundPagesTitles
 
