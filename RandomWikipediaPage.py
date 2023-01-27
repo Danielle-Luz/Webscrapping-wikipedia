@@ -18,4 +18,4 @@ class RandomWikipediaPage:
             id="mw-content-text").get_text().strip()
         pageContetWithoutSpaces = re.sub(r'\s+', " ", pageContetStripped)
 
-        return [pageContetWithoutSpaces, pageTitle]
+        return {"pageContent": pageContetWithoutSpaces, "pageTitle": pageTitle}
