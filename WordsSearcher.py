@@ -14,7 +14,7 @@ class WordsSearcher:
                 print("Digite um número inteiro.")
 
     @staticmethod
-    def getRequiredAmountOfPages():
+    def getTitlesFromPagesWithTheSearchedWord():
         pagesQuantity, searchedWord = WordsSearcher.readSearchData().values()
         foundPagesTitles = []
 
@@ -26,6 +26,14 @@ class WordsSearcher:
 
         return foundPagesTitles
 
+    @staticmethod
+    def storeFoundPagesTitles():
+        foundPageTitles = WordsSearcher.getTitlesFromPagesWithTheSearchedWord()
 
+        with open("PagesTitles.md") as pagesTitlesFile:
+            formattedFileText = f'#Títulos das páginas {"\n- ".join(foundPageTitles)}'
 
+            pagesTitlesFile.write(formattedFileText)
+
+        print("Os textos das páginas encontradas foram inseridos no arquivo: 'PagesTitles.md'")
     
