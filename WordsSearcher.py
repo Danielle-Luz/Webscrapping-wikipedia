@@ -46,12 +46,11 @@ class WordsSearcher:
     @staticmethod
     def storeFoundPagesTitles():
         foundPageTitles = WordsSearcher.getTitlesFromPagesWithTheSearchedWord()
+        print(foundPageTitles)
 
         with open("PagesTitles.md", "w", encoding="utf-8") as pagesTitlesFile:
-            formattedFileText = "# Títulos das páginas" + "\n- ".join(foundPageTitles)
+            formattedFileText = "# Títulos das páginas\n- " + "\n- ".join(foundPageTitles)
 
             pagesTitlesFile.write(formattedFileText)
 
         print("Os textos das páginas encontradas foram inseridos no arquivo: 'PagesTitles.md'")
-    
-WordsSearcher.storeFoundPagesTitles()
