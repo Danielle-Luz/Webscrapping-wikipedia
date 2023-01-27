@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 
 
@@ -12,7 +13,9 @@ class RandomWikipediaPage:
 
         soupObject = BeautifulSoup(randomPageHtml, "html.parser")
 
-        pageContetWithoutSpaces = soupObject.find(
-            id="mw-content-text").get_text().strip().replace("\n", " ")
+        pageTitle = soupObject.find("title").get_text()
+        pageContetStripped= soupObject.find(
+            id="mw-content-text").get_text().strip()
+        pageContetWithoutSpaces = re.sub(r'\s+', " ", pageContetStripped)
 
-        return pageContetWithoutSpaces
+        return [pageContetWithoutSpaces, pageTitle]
