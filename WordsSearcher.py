@@ -2,14 +2,24 @@ from RandomWikipediaPage import RandomWikipediaPage
 
 class WordsSearcher:
     @staticmethod
-    def readSearchData():
-        searchedWord = input("Digite a palavra buscada: ")
+    def readSearchedWords():
+        searchedWords = {}
 
+        while True:
+            word = input("Digite a palavra buscada: ")
+
+            searchedWords.append(word)
+
+            if input("Digite 1 caso queira inserir outra palavra: ") != "1":
+                return searchedWords
+
+    @staticmethod
+    def readPagesQuantity():
         while True:
             try:
                 pagesQuantity = int(input("Digite o número de páginas com a palavra que devem ser obtidas: "))
 
-                return {"pagesQuantity": pagesQuantity, "searchedWord": searchedWord}
+                return pagesQuantity
             except:
                 print("Digite um número inteiro.")
 
