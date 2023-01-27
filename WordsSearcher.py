@@ -1,5 +1,7 @@
 import webbrowser
+import string
 from RandomWikipediaPage import RandomWikipediaPage
+
 
 class WordsSearcher:
     @staticmethod
@@ -18,7 +20,8 @@ class WordsSearcher:
     def readPagesQuantity():
         while True:
             try:
-                pagesQuantity = int(input("Digite o número de páginas com a palavra que devem ser obtidas: "))
+                pagesQuantity = int(
+                    input("Digite o número de páginas com a palavra que devem ser obtidas: "))
 
                 return pagesQuantity
             except:
@@ -28,16 +31,21 @@ class WordsSearcher:
     def getTitlesFromPagesWithTheSearchedWord():
         pagesQuantity = WordsSearcher.readPagesQuantity()
         searchedWords = WordsSearcher.readSearchedWords()
-        foundPagesTitles = []
         
+        foundPagesTitles = []
+
         while len(foundPagesTitles) < pagesQuantity:
             pageContent, pageTitle, pageUrl = RandomWikipediaPage.getRandomWikipediaPage().values()
-            pageContentWords = pageContent.split(" ")
 
-            pageContainsAllWords = all([searchedWord in pageContentWords for searchedWord in searchedWords])
+            pageContentWithoutPunctuation = pageContent.translate( pageContent.maketrans("", "", string.punctuation)).lower()
+
+            pageContentWords = pageContentWithoutPunctuation.split(" ")
+
+            pageContainsAllWords = all(
+                [searchedWord.lower() in pageContentWords for searchedWord in searchedWords])
 
             if pageContainsAllWords:
-                foundPagesTitles.append(pageTitle) 
+                foundPagesTitles.append(pageTitle)
                 webbrowser.open(pageUrl)
 
         return foundPagesTitles
@@ -47,8 +55,10 @@ class WordsSearcher:
         foundPageTitles = WordsSearcher.getTitlesFromPagesWithTheSearchedWord()
 
         with open("PagesTitles.md", "w", encoding="utf-8") as pagesTitlesFile:
-            formattedFileText = "# Títulos das páginas\n- " + "\n- ".join(foundPageTitles)
+            formattedFileText = "# Títulos das páginas\n- " + \
+                "\n- ".join(foundPageTitles)
 
             pagesTitlesFile.write(formattedFileText)
 
-        print("Os textos das páginas encontradas foram inseridos no arquivo: 'PagesTitles.md'")
+        print(
+            "Os textos das páginas encontradas foram inseridos no arquivo: 'PagesTitles.md'")
