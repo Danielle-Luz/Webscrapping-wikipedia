@@ -34,19 +34,17 @@ class WordsSearcher:
             pageContent, pageTitle, pageUrl = RandomWikipediaPage.getRandomWikipediaPage().values()
             pageContentWords = pageContent.split(" ")
 
-            for word in searchedWords:
-                if word in pageContentWords:
-                    foundPagesTitles.append(pageTitle) 
-                    webbrowser.open(pageUrl)
+            pageContainsAllWords = all([searchedWord in pageContentWords for searchedWord in searchedWords])
 
-                    break
+            if pageContainsAllWords:
+                foundPagesTitles.append(pageTitle) 
+                webbrowser.open(pageUrl)
 
         return foundPagesTitles
 
     @staticmethod
     def storeFoundPagesTitles():
         foundPageTitles = WordsSearcher.getTitlesFromPagesWithTheSearchedWord()
-        print(foundPageTitles)
 
         with open("PagesTitles.md", "w", encoding="utf-8") as pagesTitlesFile:
             formattedFileText = "# Títulos das páginas\n- " + "\n- ".join(foundPageTitles)
