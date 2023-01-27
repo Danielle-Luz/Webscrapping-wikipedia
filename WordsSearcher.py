@@ -1,3 +1,4 @@
+import webbrowser
 from RandomWikipediaPage import RandomWikipediaPage
 
 class WordsSearcher:
@@ -29,10 +30,16 @@ class WordsSearcher:
         searchedWords = WordsSearcher.readSearchedWords()
         foundPagesTitles = []
         
-        while len(foundPagesTitles) <= pagesQuantity:
-            pageContent, pageTitle = RandomWikipediaPage.getRandomWikipediaPage().values()
+        while len(foundPagesTitles) < pagesQuantity:
+            pageContent, pageTitle, pageUrl = RandomWikipediaPage.getRandomWikipediaPage().values()
+            pageContentWords = pageContent.split(" ")
 
-            next(foundPagesTitles.append(pageTitle) for word in searchedWords if word in pageContent)
+            for word in searchedWords:
+                if word in pageContentWords:
+                    foundPagesTitles.append(pageTitle) 
+                    webbrowser.open(pageUrl)
+
+                    break
 
         return foundPagesTitles
 
