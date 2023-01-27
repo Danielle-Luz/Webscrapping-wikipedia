@@ -1,12 +1,18 @@
-import requests;
+import requests
+from bs4 import BeautifulSoup
+
 
 class RandomWikipediaPage:
-    url = "https://en.wikipedia.org/wiki/Wikipedia:Random"
+    url = "https://pt.wikipedia.org/wiki/Special:Random"
 
     @staticmethod
-    def getRandomWikipediaPage ():
-        randomwWikipediaPage = requests.get(RandomWikipediaPage.url)
-        pageHtml = randomwWikipediaPage.text()
-        
+    def getRandomWikipediaPage():
+        randomwPage = requests.get(RandomWikipediaPage.url)
+        randomPageHtml = randomwPage.text
 
-RandomWikipediaPage.getRandomWikipediaPage()
+        soupObject = BeautifulSoup(randomPageHtml, "html.parser")
+
+        pageContetWithoutSpaces = soupObject.find(
+            id="mw-content-text").get_text().strip().replace("\n", " ")
+
+        return pageContetWithoutSpaces
